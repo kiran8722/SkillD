@@ -12,7 +12,7 @@ import TanstackQueryProvider from '../integrations/tanstack-query/root-provider'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
 
-import '../styles.css'
+import  '../styles.css'
 
 import type { QueryClient } from '@tanstack/react-query'
 import Navbar from '#/components/Navbar'
@@ -52,7 +52,7 @@ function RootDocument({ children }: { children: ReactNode }) {
   }, [])
 
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>

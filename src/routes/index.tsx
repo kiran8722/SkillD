@@ -41,23 +41,29 @@ function Home() {
           </h2>
           <p>
             {""}
-            Latest Skills loaded from the database in decesnding creation order.
+            Latest Skills loaded from the database in descending creation order.
           </p>
         </div>
 
         <div>
-          <p>
+          <div>
             {dummySkills.length > 0 ? (
               <div className="skills-grid">
-                {dummySkills.map((skill) => (
-                  <SkillCard key={skill.id} {...skill}>
-                  </SkillCard>
-                ))}
+                {[...dummySkills]
+                  .sort((a, b) => {
+                    const aTime = a.createdAt ? Date.parse(a.createdAt) : 0
+                    const bTime = b.createdAt ? Date.parse(b.createdAt) : 0
+                    return bTime - aTime
+                  })
+                  .map((skill) => (
+                    <SkillCard key={skill.id} {...skill}>
+                    </SkillCard>
+                  ))}
               </div>
             ) : (
               <p> No skills created yet. </p>
             )}
-          </p>
+          </div>
         </div>
 
       </section>

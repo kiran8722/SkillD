@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { Copy, Check, ArrowBigUp, MessageSquare, ArrowUpRight, Bookmark } from 'lucide-react'
 
-const SkillCard = ({ authorEmail, category, createdAt, description, installCommand, tags, title } : SkillRecord) => {
+const SkillCard = ({ authorEmail, authorName, category, createdAt, description, installCommand, tags, title } : SkillRecord) => {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
@@ -17,7 +17,7 @@ const SkillCard = ({ authorEmail, category, createdAt, description, installComma
 
   return ( 
         <article className="skill-card">
-            <Link to="/skills" tabindex={-1} aria-label={`Open ${title}`} className='overlay'/>
+            <Link to="/skills" tabIndex={-1} aria-label={`Open ${title}`} className='overlay'/>
 
             <div className="chrome">
                 <div className="chrome-bar">
@@ -35,7 +35,7 @@ const SkillCard = ({ authorEmail, category, createdAt, description, installComma
                     <div className="author">
                         <img src="/logo192.png" alt="Author avatar"  className="avatar"/>
                         <div className="author-copy">
-                            <p>Kiran</p>
+                            <p>{authorName ?? 'Unknown author'}</p>
                             <p>{new Date(createdAt as string).toLocaleDateString()}</p>
                         </div>
                     </div>

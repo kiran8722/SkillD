@@ -7,7 +7,7 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { useEffect, useState, type ReactNode } from 'react'
 
-import ClerkProvider from '../integrations/clerk/provider'
+import { ClerkProvider } from '@clerk/tanstack-react-start'
 import TanstackQueryProvider from '../integrations/tanstack-query/root-provider'
 
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
@@ -20,6 +20,8 @@ import Navbar from '#/components/Navbar'
 interface MyRouterContext {
   queryClient: QueryClient
 }
+
+const clerkPublishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY as string | undefined
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
@@ -42,6 +44,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     links: [],
   }),
   shellComponent: RootDocument,
+  notFoundComponent: () => <p>Page not found</p>,
 })
 
 function RootDocument({ children }: { children: ReactNode }) {
@@ -57,7 +60,7 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <ClerkProvider>
+        <ClerkProvider publishableKey={clerkPublishableKey}>
           <div id="root-layout">
             <header>
               <div className='frame'>
